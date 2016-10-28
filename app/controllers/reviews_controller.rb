@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :find_book
   before_action :find_review, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new,:edit]
   def new
     @review = Review.new
   end
@@ -28,7 +29,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @review.destroy
     redirect_to book_path(@book)
   end
